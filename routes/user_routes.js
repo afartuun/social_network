@@ -4,7 +4,7 @@ const{getAllUsers, getUserById, createUser, updateUser, deleteUser, addFriend, d
 
 router.route('/').get(getAllUsers).post(createUser);
 
-router.router('/:id').get(getUserById).put(updateUser).delete(deleteUser);
+router.route('/:id').get(getUserById).put(updateUser).delete(deleteUser);
 
 router.route('/:userId/friends/friends/:friendId').post(addFriend).delete(deleteFriend);
 

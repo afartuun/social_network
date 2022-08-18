@@ -1,19 +1,25 @@
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
-app.use('./routes');
+const router = require('./routes/index');
+api = require('./routes');
+app.use('/api', api);
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 
-mongoose.connect(process.env.DATABASE_URL, {useNewUrlParser: true, useFindAndModify: false, UseUnifiedTopology: true});
+mongoose.connect('mongodb://localhost/social_network', {useNewUrlParser: true, UseUnifiedTopology: true});
 const db = mongoose.connection
 db.on('error', (error) => console.error(error))
 db.once('open', () => console.log('Connected to databse'));
 
-app.use(express.json());
 app.use(express.urlencoded({extended: true}));
+app.use(express.json());
 
 mongoose.set('debug', true);
 
 
 app.listen(PORT, () => console.log('Server Started'));
+
+// process.env.DATABASE_URL
+// , useFindAndModify: false
+
